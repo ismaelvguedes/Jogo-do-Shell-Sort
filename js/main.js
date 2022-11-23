@@ -12,6 +12,10 @@ class Vetor{
         for (let index = 0; index < 8; index++) {
             this.vetor.push(Math.floor(Math.random() * 10));
         }
+        // Casos especiais
+        // this.vetor = [0, 8, 2, 7, 5, 6, 4, 9];
+        // this.vetor = [9, 7, 3, 2, 7, 9, 7, 4];
+        // this.vetor = [9, 5, 6, 2, 7, 9, 1, 0];
         this.atualizar();
         this.respostaDada = true;
         this.respondido = false;
@@ -20,6 +24,7 @@ class Vetor{
         this.status = 'Esperando';
         this.abertura = this.data.getMinutes();
         this.calcular();
+        this.denovo = false;
     }
     atualizar(){
         this.lista.innerHTML = '';
@@ -70,9 +75,9 @@ class Vetor{
         }
     }
     async calcular(){
+        console.log(this.vetor);
         let gap, x, y, memoria;
-    
-        gap = parseInt(this.vetor.length / 2);
+        gap = parseInt((this.vetor.length / 2));
         this.gap = gap;
         this.atualizar();
         while(gap > 0){
@@ -81,12 +86,14 @@ class Vetor{
                 memoria = this.vetor[x];
                 y = x;
                 if(!this.selecionado){
-                    this.selecionar(y - gap, x);
+                    this.selecionar(y - gap, y);
                     this.selecionado = true;
                 }
                 if(this.respondido){
                     this.deselecionar();
                     while((y >= gap) && (memoria < this.vetor[y - gap])){
+                        this.selecionar(y - gap, y);
+                        this.atualizar();
                         if(this.respondido){
                             this.verificar(TROCAR);
                             this.vetor[y] = this.vetor[y - gap];
@@ -94,13 +101,10 @@ class Vetor{
                             trocou = true;
                             this.vetor[y] = memoria;
                             this.respondido = false;
+                            this.deselecionar();
                             this.atualizar();
-                            this.abertura = this.data.getMinutes();
                         } else {
-                            if(!this.selecionado){
-                                this.selecionar(y - gap, x);
-                                this.selecionado = true;
-                            }
+                            this.selecionar(y - gap, y);
                             await sleep(100);
                         }
                     }
@@ -108,16 +112,17 @@ class Vetor{
                         this.verificar(CONTINUAR);
                         this.respondido = false;
                         this.atualizar();
-                        this.abertura = this.data.getMinutes();
                     }
                 }
                 else {
                     x--;
                     await sleep(100);
                 }
+                
             }
             gap = parseInt(gap / 2);
             this.gap = gap;
+            this.atualizar();
         }
         this.status = "FIM DE JOGO!"
         this.atualizar();
