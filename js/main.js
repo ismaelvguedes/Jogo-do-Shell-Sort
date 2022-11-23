@@ -9,7 +9,29 @@ class Vetor{
         this.vetor = []
         this.lista = document.querySelector("#vetor");
         this.gap_text = document.querySelector("#gap");
-        for (let index = 0; index < (Math.floor(Math.random() * 10)) + 2 ; index++) {
+        for (let index = 0; index < (Math.floor(Math.random() * 10)) + 3 ; index++) {
+            this.vetor.push(Math.floor(Math.random() * 10));
+        }
+        // Casos especiais
+        // this.vetor = [0, 8, 2, 7, 5, 6, 4, 9];
+        // this.vetor = [9, 7, 3, 2, 7, 9, 7, 4];
+        // this.vetor = [9, 5, 6, 2, 7, 9, 1, 0];
+        this.atualizar();
+        this.respostaDada = true;
+        this.respondido = false;
+        this.data = new Date();
+        this.selecionado = false;
+        this.status = 'Esperando';
+        this.abertura = this.data.getMinutes();
+        this.score = 0;
+        this.calcular();
+        this.denovo = false;
+    }
+    novo(){
+        this.vetor = []
+        this.lista = document.querySelector("#vetor");
+        this.gap_text = document.querySelector("#gap");
+        for (let index = 0; index < (Math.floor(Math.random() * 10)) + 3 ; index++) {
             this.vetor.push(Math.floor(Math.random() * 10));
         }
         // Casos especiais
@@ -33,6 +55,7 @@ class Vetor{
         }
         this.gap_text.innerText = "Gap: " + this.gap;
         document.getElementById('tamanho').innerText = 'Tamanho: ' + this.vetor.length;
+        document.getElementById('score').innerText = this.score;
         switch (this.status) {
             case 'Acertou !':
                 document.getElementById('resposta').style.color = 'greenyellow';
@@ -69,6 +92,7 @@ class Vetor{
     verificar(resposta){
         if (this.respostaDada == resposta){
             this.status = 'Acertou !';
+            this.score += 1;
         }
         else {
             this.status = 'Errou !';

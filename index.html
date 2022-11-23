@@ -8,13 +8,14 @@
         <title>Jogo do Shell Sort</title>
 
         <link rel="stylesheet" href="css/estilo_index.css">
+        <link rel="shortcut icon" href="img/icone.svg" type="image/x-icon">
     </head>
     <body>
         <header>
             <h1>Jogo do Shell Sort</h1>
         </header>
         <div id="info">
-            <h2 id="resposta">Esperando</h2>
+            Status:<h4 id="resposta">Esperando</h4> |Score: <h4 id="score">0</h4>
         </div>    
         <main id="centro">
             <ul id="vetor"></ul>
@@ -26,11 +27,9 @@
                 <h3 id="pergunta">O que fazer?</h3>
                 <a id="continuar" onmousedown="vetor.reponder(CONTINUAR)">CONTINUAR</a>
                 <a id="trocar" onmousedown="vetor.reponder(TROCAR)">TROCAR</a>
+                <a id="novo" onmousedown="vetor.novo()">NOVO</a>
             </div>
         </main>
-        <footer>
-
-        </footer>
 
         <script src="js/main.js" ></script>
     </body>
