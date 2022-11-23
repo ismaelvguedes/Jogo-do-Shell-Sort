@@ -6,6 +6,10 @@ function sleep(ms) {
 
 class Vetor{
     constructor(){
+        this.certo = new Audio('audio/certo.mp3');
+        this.errado = new Audio('audio/errado.mp3');
+        this.certo.volume = .2;
+        this.errado.volume = .2;
         this.vetor = []
         this.lista = document.querySelector("#vetor");
         this.gap_text = document.querySelector("#gap");
@@ -16,6 +20,7 @@ class Vetor{
         // this.vetor = [0, 8, 2, 7, 5, 6, 4, 9];
         // this.vetor = [9, 7, 3, 2, 7, 9, 7, 4];
         // this.vetor = [9, 5, 6, 2, 7, 9, 1, 0];
+        // this.vetor = [8, 8, 9, 6, 1];
         this.atualizar();
         this.respostaDada = true;
         this.respondido = false;
@@ -34,10 +39,6 @@ class Vetor{
         for (let index = 0; index < (Math.floor(Math.random() * 10)) + 3 ; index++) {
             this.vetor.push(Math.floor(Math.random() * 10));
         }
-        // Casos especiais
-        // this.vetor = [0, 8, 2, 7, 5, 6, 4, 9];
-        // this.vetor = [9, 7, 3, 2, 7, 9, 7, 4];
-        // this.vetor = [9, 5, 6, 2, 7, 9, 1, 0];
         this.atualizar();
         this.respostaDada = true;
         this.respondido = false;
@@ -93,9 +94,14 @@ class Vetor{
         if (this.respostaDada == resposta){
             this.status = 'Acertou !';
             this.score += 1;
+            this.certo.currentTime = 0;
+            this.certo.play();
         }
         else {
             this.status = 'Errou !';
+            this.errado.currentTime = 0;
+            
+            this.errado.play();
         }
     }
     async calcular(){
