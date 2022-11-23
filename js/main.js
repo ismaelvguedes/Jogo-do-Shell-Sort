@@ -9,7 +9,7 @@ class Vetor{
         this.vetor = []
         this.lista = document.querySelector("#vetor");
         this.gap_text = document.querySelector("#gap");
-        for (let index = 0; index < 8; index++) {
+        for (let index = 0; index < (Math.floor(Math.random() * 10)) + 2 ; index++) {
             this.vetor.push(Math.floor(Math.random() * 10));
         }
         // Casos especiais
