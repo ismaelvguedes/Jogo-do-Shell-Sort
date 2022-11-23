@@ -67,6 +67,9 @@ class Vetor{
             case 'FIM DE JOGO!':
                 document.getElementById('resposta').style.color = 'yellow';
                 break;
+            case 'NOVO GAP!':
+                document.getElementById('resposta').style.color = 'pink';
+                break;
             default:
                 document.getElementById('resposta').style.color = 'white';
                 break;
@@ -152,6 +155,7 @@ class Vetor{
             }
             gap = parseInt(gap / 2);
             this.gap = gap;
+            this.status = 'NOVO GAP!';
             this.atualizar();
         }
         this.status = "FIM DE JOGO!"
