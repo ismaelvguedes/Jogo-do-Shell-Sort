@@ -50,9 +50,9 @@ class Vetor{
         this.respondido = true;
     }
     selecionar(i1, i2){
-        this.lista.children.item(i1).style.backgroundColor = '#c7c7c7';
+        this.lista.children.item(i1).style.backgroundColor = '#f1ff7f';
         this.lista.children.item(i1).style.transform = ' translateY(-30px)';
-        this.lista.children.item(i2).style.backgroundColor = '#c7c7c7';
+        this.lista.children.item(i2).style.backgroundColor = '#f1ff7f';
         this.lista.children.item(i2).style.transform = ' translateY(-30px)';
     }
     deselecionar(){
